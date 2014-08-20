@@ -123,7 +123,7 @@ I spent my summer coop term at the University of Ottawa studying neuroscience
 \begin_layout Standard
 During my time there I learned the basics of neuroscience.
  Professor Bela and I talked about a project to model an experiment where
- nerve damage is measured in an arm by electrically stimulating one area
+ nerve damage in an arm is measured by electrically stimulating one area
  of the arm (like the elbow) and then measuring the propagated signal through
  the nerves at another point (like the wrist).
  In arms with damaged nerves, this signal can arrive more slowly or more
@@ -132,15 +132,16 @@ During my time there I learned the basics of neuroscience.
 \end_layout
 
 \begin_layout Standard
-Before I could model a bundle of damaged nerves I had to learn and understand
- how single neurons behaved.
+Before I could model a bundle of damaged nerves in an arm I had to learn
+ and understand how single neurons behaved.
  This meant learning the basic physiology of a neuron: about axons, myelin
  sheaths, and axon nodes.
- After that, I learned about the Hodgkin-Huxley model of an axon node, a
+ After that, I learned about the Hodgkin-Huxley model of an axon node: a
  mathematical model developped in the 1950s used to model voltage clamp
- experiments using a giant squid axon.
+ experiments with a giant squid axon.
  After I could successfully model a single node, we found a paper by Donald
- Mcneal in 1976 that presented a model of axon nodes connected to each other.
+ Mcneal written in 1976 that presented a model of axon nodes connected to
+ each other.
  With this model we could simulate signals propagating from node to node,
  and successfully simulated results that indicated propagation.
  After that, we added a model of damage to each node of the axon.
@@ -256,6 +257,193 @@ The Hodgkin-Huxley model is a set of four differential equations that can
  and it's parameters can be tweaked for a wide variety of applications outside
  of the squid axon.
  
+\end_layout
+
+\begin_layout Standard
+The equations in the Hodgkin-Huxley model that form the basis of our model
+ are the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\begin{alignedat}{1}C_{m}\frac{dV_{m}}{dt}=-I_{Na}-I_{K}-I_{L}+I_{stim}\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The current terms 
+\begin_inset Formula $I_{Na}$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{K}$
+\end_inset
+
+ represent the ionic currents due to sodium and potassium through the cellular
+ membrane.
+ Hodgkin and Huxley introduced an 
+\begin_inset Formula $I_{L}$
+\end_inset
+
+term for what they called 'leakage' current, to account for current flow
+ that wasn't caused by sodium or potassium.
+ The current terms are treated using Ohm's law and in turn obey more equations:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\begin{aligned}I_{Na} & = & \bar{g}_{Na}m^{3}h(V-E_{Na})\\
+I_{K} & = & \bar{g}_{K}n^{4}(V-E_{K})\\
+I_{L} & = & \bar{g}_{L}(V-E_{L})
+\end{aligned}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In these equations, the 
+\begin_inset Formula $\bar{g}$
+\end_inset
+
+ terms are conductances (the inverse of resistance).
+ The 
+\begin_inset Formula $m$
+\end_inset
+
+, 
+\begin_inset Formula $h$
+\end_inset
+
+, and 
+\begin_inset Formula $n$
+\end_inset
+
+ variables are dimensionless quantities between 0 and 1 and represent sodium
+ channel activation, sodium channel inactivation, and potassium channel
+ activation respectively.
+ These variables capture the effect of the ion channels in the cellular
+ membrane.
+ The 
+\begin_inset Formula $E_{Na}$
+\end_inset
+
+, 
+\begin_inset Formula $E_{K}$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{L}$
+\end_inset
+
+ terms are constants called Nernst potentials.
+ 
+\end_layout
+
+\begin_layout Standard
+The final pieces are the equations that govern the 
+\begin_inset Formula $m$
+\end_inset
+
+, 
+\begin_inset Formula $h$
+\end_inset
+
+, and 
+\begin_inset Formula $n$
+\end_inset
+
+ variables.
+ These three variables are governed by first-order differential equations
+ and by transition rate functions 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ These functions are voltage dependent and represent the number of times
+ per second that a closed gate opens (in the case of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+) and the number of times per second that an open gate closes.
+ These equations are given by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\begin{aligned}\frac{dm}{dt} & = & \alpha_{m}(1-m)-\beta_{m}m\\
+\frac{dh}{dt} & = & \alpha_{h}(1-h)-\beta_{h}h\\
+\frac{dn}{dt} & = & \alpha_{n}(1-n)-\beta_{n}n
+\end{aligned}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The alpha-beta functions are found empirically, and each of the 
+\begin_inset Formula $m$
+\end_inset
+
+, 
+\begin_inset Formula $h$
+\end_inset
+
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+ variables have their own pair of alpha-beta functions:
+\begin_inset Formula 
+\[
+\begin{aligned}\alpha_{m} & = & 0.1\frac{V+40}{1-exp(-(V+40)/10)} &  & \alpha_{h} & = & 0.07exp(-(V+65)/20)\\
+\beta_{m} & = & 4exp(-(V+65)/18) &  & \beta_{h} & = & \frac{1}{exp(-(V+35)/10)+1}
+\end{aligned}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\[
+\begin{aligned}\alpha_{n} & = & 0.01\frac{V+55}{1-exp(-(V+55)/10)}\\
+\beta_{n} & = & 0.125exp(-(V+65)/80)
+\end{aligned}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
