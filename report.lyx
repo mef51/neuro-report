@@ -116,12 +116,145 @@ I spent my summer coop term at the University of Ottawa studying neuroscience
  the goal of shaving off almost 2 hours spent commuting every day.
  I worked on the third-floor of Macdonald, the Physics building, in an office
  with two other students also doing research with Professor Bela.
+ The environment was very relaxed and academic.
+ I worked on my own laptop.
+\end_layout
+
+\begin_layout Standard
+During my time there I learned the basics of neuroscience.
+ Professor Bela and I talked about a project to model an experiment where
+ nerve damage is measured in an arm by electrically stimulating one area
+ of the arm (like the elbow) and then measuring the propagated signal through
+ the nerves at another point (like the wrist).
+ In arms with damaged nerves, this signal can arrive more slowly or more
+ weakly than in arms with healthy nerves.
  
 \end_layout
 
 \begin_layout Standard
-The goal of my project during my coop term was to study the effect of nerve
- damage on signal propagation.
+Before I could model a bundle of damaged nerves I had to learn and understand
+ how single neurons behaved.
+ This meant learning the basic physiology of a neuron: about axons, myelin
+ sheaths, and axon nodes.
+ After that, I learned about the Hodgkin-Huxley model of an axon node, a
+ mathematical model developped in the 1950s used to model voltage clamp
+ experiments using a giant squid axon.
+ After I could successfully model a single node, we found a paper by Donald
+ Mcneal in 1976 that presented a model of axon nodes connected to each other.
+ With this model we could simulate signals propagating from node to node,
+ and successfully simulated results that indicated propagation.
+ After that, we added a model of damage to each node of the axon.
+ The model for this damage was developped by Professor Bela's group.
+ With all these pieces we were able to represent a bundle of nerve fibers
+ as found in an arm; we could control the length of the nerve, the size
+ of each nerve and the amount of damage in each nerve.
+ This model lets us simulate the experiment with different kinds of arms,
+ healthy and unhealthy ones.
+\end_layout
+
+\begin_layout Standard
+This report will give an overview of the concepts necessary for the building
+ of the model and a look at the simulation code and how it can be used to
+ produce data on the arm signal experiment with a wide variety of parameters.
+ In addition some results from the model will be shown and direction for
+ the future will be explored.
+\end_layout
+
+\begin_layout Section
+Neurons
+\end_layout
+
+\begin_layout Standard
+At the heart of the project is the behaviour of neurons.
+ Neurons are cells capable of transmitting electrical signals.
+ In human bodies they form the structure of our brains and control the movement
+ of our limbs.
+ In 1952 A.
+ L.
+ Hodgkin and A.
+ F.
+ Huxley measured spikes of potential in the cellular membrane of a giant
+ squid axon.
+ These spikes are referred to as action potentials, and are signals that
+ can propagate down the length of a neuron and stimulate an adjacent neuron,
+ thus transmitting the signal even further.
+ Hodgkin and Huxley's innovation was in creating a mathematical model that
+ attempted to explain the electrical activity of the neuron.
+ 
+\end_layout
+
+\begin_layout Standard
+The neuron is composed of the cell body, dendrites, synapses, and axons.
+ It is the axons that are critical in understanding the Hodgkin-Huxley model.
+ Axons are long tendrils that jut out from the cell body; they are long,
+ thin extensions of the cell that usually reach out to other neurons.
+ The wall of the axon, the cellular membrane, is polarized.
+ A concentration gradient of ions is maintained between the inside and the
+ outside of the membrane so that the inside of the cell is more negatively
+ charged than the outside.
+ Hodgkin and Huxley initiated action potentials in the squid axon by stimulating
+ it at a point with an external potential.
+ They explained that when an action potential occurs, positively charged
+ sodium ions would flood into the cell through a point in the membrane of
+ the axon, suddenly raising the membrane potential at that point, and disturbing
+ the membrane potential a little further down the axon.
+ After the flood of sodium ions into the axon, potassium ions leave through
+ the membrane, the flood of sodium into the axon at the inital point slows
+ and eventually stops, 
+\begin_inset Quotes eld
+\end_inset
+
+resetting
+\begin_inset Quotes erd
+\end_inset
+
+ the membrane potential of the axon at that point to its resting potential.
+ Meanwhile at a point nearby on the axon, after being destabilized by it's
+ neighbour, the same thing occurs and the potential spike is observed a
+ little further down.
+ This continues and the spike can be said to travel down the axon, and all
+ the while the axon attempts to restore the concentration gradient and maintain
+ a polarized potential all along the inside and outside of the cellular
+ wall.
+\end_layout
+
+\begin_layout Standard
+Though Hodgkin and Huxley didn't know it at the time, the concentration
+ gradient is maintained by ion channels in the cellular membrane.
+ These ion pumps are proteins embedded in the membrane that can selectively
+ allow ions in and out of the cell, controlling ionic currents through the
+ membrane.
+ Without knowledge of ion channels, Hodgkin and Huxley modelled the ionic
+ currents as selective permeabilities in the membrane, controlled by 
+\begin_inset Quotes eld
+\end_inset
+
+activation
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+inactivation
+\begin_inset Quotes erd
+\end_inset
+
+ variables that depended on the voltage of the membrane.
+ These would eventually be understood as voltage-gated ion channels that
+ open and close depending on the current voltage of the membrane.
+ 
+\end_layout
+
+\begin_layout Standard
+The Hodgkin-Huxley model is a set of four differential equations that can
+ be solved in response to a stimulus for a solution of the membrane voltage.
+ The model successfully produces action potentials and closely matches the
+ experimental data acquired from the squid axon.
+ Since then, the model has been used as the basis for more complicated models,
+ and it's parameters can be tweaked for a wide variety of applications outside
+ of the squid axon.
  
 \end_layout
 
