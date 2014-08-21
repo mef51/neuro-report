@@ -266,9 +266,9 @@ The equations in the Hodgkin-Huxley model that form the basis of our model
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
+\begin{equation}
 \begin{alignedat}{1}C_{m}\frac{dV_{m}}{dt}=-I_{Na}-I_{K}-I_{L}+I_{stim}\end{alignedat}
-\]
+\end{equation}
 
 \end_inset
 
@@ -383,12 +383,12 @@ The final pieces are the equations that govern the
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
+\begin{equation}
 \begin{aligned}\frac{dm}{dt} & = & \alpha_{m}(1-m)-\beta_{m}m\\
 \frac{dh}{dt} & = & \alpha_{h}(1-h)-\beta_{h}h\\
 \frac{dn}{dt} & = & \alpha_{n}(1-n)-\beta_{n}n
 \end{aligned}
-\]
+\end{equation}
 
 \end_inset
 
@@ -440,6 +440,138 @@ The alpha-beta functions are found empirically, and each of the
 \beta_{n} & = & 0.125exp(-(V+65)/80)
 \end{aligned}
 \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These equations can be solved for 
+\begin_inset Formula $V_{m}$
+\end_inset
+
+ using the the following scheme:
+\end_layout
+
+\begin_layout Enumerate
+Set initial values for 
+\begin_inset Formula $V_{m}$
+\end_inset
+
+, 
+\begin_inset Formula $m$
+\end_inset
+
+, 
+\begin_inset Formula $h$
+\end_inset
+
+, and 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Calculate values for 
+\begin_inset Formula $I_{Na}$
+\end_inset
+
+, 
+\begin_inset Formula $I_{K}$
+\end_inset
+
+, 
+\begin_inset Formula $I_{L}$
+\end_inset
+
+, and all the alpha-beta functions using the current values of 
+\begin_inset Formula $V_{m}$
+\end_inset
+
+, 
+\begin_inset Formula $m$
+\end_inset
+
+, 
+\begin_inset Formula $h$
+\end_inset
+
+, and 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Numerically integrate the differential equations on 
+\begin_inset Formula $V_{m}$
+\end_inset
+
+, 
+\begin_inset Formula $m$
+\end_inset
+
+, 
+\begin_inset Formula $h$
+\end_inset
+
+, and 
+\begin_inset Formula $n$
+\end_inset
+
+ (equations (1) and (2)).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Repeat from step 2.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Figure 1
+\series default
+ shows an example solution of the memrane voltage with action potentials
+ caused by a stimulus.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename model.jpg
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A solution of the Hodgkin-Huxley model (in blue) with an applied stimulus.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \end_inset
 
