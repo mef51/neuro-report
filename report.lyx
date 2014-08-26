@@ -189,7 +189,84 @@ The neuron is composed of the cell body, dendrites, synapses, and axons.
  It is the axons that are critical in understanding the Hodgkin-Huxley model.
  Axons are long tendrils that jut out from the cell body; they are long,
  thin extensions of the cell that usually reach out to other neurons.
- The wall of the axon, the cellular membrane, is polarized.
+ In mature neurons the arm of the axon is protected by a myelin sheath.
+ This sheath does not cover the entire axon, since it is the membrane of
+ the axon and not the myelin sheath that allows ions to flow through the
+ membrane.
+ Instead, the sheath covers the axon in a way that leaves periodic gaps
+ of axon membrane exposed.
+ These axonal gaps are called nodes of Ranvier.
+ In this report I refer to them as axon nodes.
+ 
+\end_layout
+
+\begin_layout Standard
+The myelin sheath is important in that it changes the way signals propagate
+ down the axon.
+ Without the sheath, signals flow smoothly down the membrane of the axon,
+ each spiking patch of membrane stimulating a patch of membrane right next
+ to it.
+ With the sheath, the signal jumps from exposed node to exposed node.
+ This form of propagation is called saltatory propagation and is faster
+ than propagation without the myelin sheath.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:axon"
+
+\end_inset
+
+ shows a neuron depicting axon nodes, myelin sheaths and saltatory propagation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename saltatoryConduction.jpg
+	width 75page%
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Depiction of a neuron with an axon and nodes seperated by myelin sheaths.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:axon"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Hodgkin-Huxley Model (1952)
+\end_layout
+
+\begin_layout Standard
+The wall of the axon, the cellular membrane, is polarized.
  A concentration gradient of ions is maintained between the inside and the
  outside of the membrane so that the inside of the cell is more negatively
  charged than the outside.
@@ -222,7 +299,7 @@ resetting
 \begin_layout Standard
 Though Hodgkin and Huxley didn't know it at the time, the concentration
  gradient is maintained by ion channels in the cellular membrane.
- These ion pumps are proteins embedded in the membrane that can selectively
+ These ion channels are proteins embedded in the membrane that can selectively
  allow ions in and out of the cell, controlling ionic currents through the
  membrane.
  Without knowledge of ion channels, Hodgkin and Huxley modelled the ionic
@@ -276,7 +353,25 @@ The equations in the Hodgkin-Huxley model that form the basis of our model
 \end_layout
 
 \begin_layout Standard
-The current terms 
+The equation is an application of the capacitance equation where the cellular
+ membrane is a sort of capacitor because it separates charges from the inside
+ and outside of the cell.
+ The term 
+\begin_inset Formula $C_{m}$
+\end_inset
+
+ represents the membrane capacitance, and 
+\begin_inset Formula $V_{m}$
+\end_inset
+
+ represents the potential difference between the inside and outside of the
+ cell.
+ 
+\begin_inset Formula $V_{m}$
+\end_inset
+
+ is called the membrane voltage.
+ The current terms 
 \begin_inset Formula $I_{Na}$
 \end_inset
 
@@ -534,15 +629,22 @@ Repeat from step 2.
 \begin_layout Standard
 
 \series bold
-Figure 1
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:hhexample"
+
+\end_inset
+
+ 
 \series default
- shows an example solution of the memrane voltage with action potentials
+shows an example solution of the membrane voltage with action potentials
  caused by a stimulus.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
-placement h
+placement H
 wide false
 sideways false
 status open
@@ -562,6 +664,13 @@ status open
 
 \begin_layout Plain Layout
 A solution of the Hodgkin-Huxley model (in blue) with an applied stimulus.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:hhexample"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -569,13 +678,18 @@ A solution of the Hodgkin-Huxley model (in blue) with an applied stimulus.
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+McNeal Model (1976)
+\end_layout
+
+\begin_layout Standard
+In 1976 Donald R.
+ McNeal published a paper analyzing a model of interconnected nodes
 \end_layout
 
 \end_body
