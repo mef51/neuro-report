@@ -689,7 +689,21 @@ McNeal Model (1976)
 
 \begin_layout Standard
 In 1976 Donald R.
- McNeal published a paper analyzing a model of interconnected nodes
+ McNeal published a paper analyzing a model of interconnected axon nodes.
+ The paper included a model for a simple stimulus to be applied at a single
+ node and for the action potentials to propagate from one node to the next.
+ We adapted this model for our purposes and used it to model an arbitrary
+ number of axon nodes connected to each other.
+ This model also takes into account the dimensions of the neuron, that is,
+ its length, its diameter, and the width of the axon node gap between the
+ myelin sheaths.
+\end_layout
+
+\begin_layout Standard
+In this model the equation on the membrane voltage, in addition to the ionic
+ current terms, has current terms for the currents leaving the node, the
+ currents entering the node, as well as a stimulus current caused by an
+ external potential.
 \end_layout
 
 \end_body
