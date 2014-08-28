@@ -392,12 +392,12 @@ term for what they called 'leakage' current, to account for current flow
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
+\begin{equation}
 \begin{aligned}I_{Na} & = & \bar{g}_{Na}m^{3}h(V-E_{Na})\\
 I_{K} & = & \bar{g}_{K}n^{4}(V-E_{K})\\
 I_{L} & = & \bar{g}_{L}(V-E_{L})
 \end{aligned}
-\]
+\end{equation}
 
 \end_inset
 
@@ -704,6 +704,134 @@ In this model the equation on the membrane voltage, in addition to the ionic
  current terms, has current terms for the currents leaving the node, the
  currents entering the node, as well as a stimulus current caused by an
  external potential.
+\end_layout
+
+\begin_layout Standard
+For a given axon node 
+\begin_inset Formula $n$
+\end_inset
+
+, the change in its membrane voltage 
+\begin_inset Formula $V_{n}$
+\end_inset
+
+ depends on an axial conductance 
+\begin_inset Formula $G_{a}$
+\end_inset
+
+, which represents the conductance between the nodes, the membrane voltages
+ of the node's neighbours 
+\begin_inset Formula $V_{n-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{n+1}$
+\end_inset
+
+, and the external potential felt by the node and it's neighbours due to
+ some stimulus 
+\begin_inset Formula $V_{e,n-1}$
+\end_inset
+
+, 
+\begin_inset Formula $V_{e,n}$
+\end_inset
+
+, and 
+\begin_inset Formula $V_{e,n+1}$
+\end_inset
+
+.
+ In addition to these new terms are the usual terms for the ionic currents
+ through the membrane of the node.
+ The equation is given by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+C_{m}\frac{dV_{n}}{dt}=G_{a}(V_{n-1}-2V_{n}+V_{n+1}+V_{e,n-1}-2V_{e,n}+V_{e,n+1})-\pi dl(i_{Na}+i_{K}+i_{L})
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The current terms become lowerscript 
+\begin_inset Formula $i$
+\end_inset
+
+'s because they are current densities; current per unit area of cellular
+ membrane.
+ The 
+\begin_inset Formula $\pi dl$
+\end_inset
+
+ term multiplies by the sum of the current densities to form a term representing
+ the total ionic current.
+ The axon node is modelled as a cylinder and the wall of the cylinder (not
+ the caps) serves as the part of the cellular membrane exposed to surrounding
+ ions.
+ The area of this wall is 
+\begin_inset Formula $\pi dl$
+\end_inset
+
+ where 
+\begin_inset Formula $d$
+\end_inset
+
+ is the diameter of the cylinder and 
+\begin_inset Formula $l$
+\end_inset
+
+ is its length.
+ 
+\end_layout
+
+\begin_layout Standard
+The external potential felt by a node 
+\begin_inset Formula $V_{e}$
+\end_inset
+
+ is assumed to be due to a stimulus 
+\begin_inset Formula $I$
+\end_inset
+
+ from a monopolar spherical electrode 
+\begin_inset Formula $r$
+\end_inset
+
+ distance away from the node.
+ Assuming an isotropic medium (where the permittivity 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ and the permeability 
+\begin_inset Formula $\mu$
+\end_inset
+
+ are uniform in all directions), the expression for 
+\begin_inset Formula $V_{e}$
+\end_inset
+
+ is given by
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+V_{e}=\frac{\rho_{e}I}{4\pi r}
+\]
+
+\end_inset
+
+ Where 
+\begin_inset Formula $\rho_{e}$
+\end_inset
+
+ is the resistivity of the medium.
 \end_layout
 
 \end_body
