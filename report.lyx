@@ -103,6 +103,30 @@ LatexCommand tableofcontents
 
 \end_layout
 
+\begin_layout Abstract
+In this report I describe my time at the uOttawa Physics Department doing
+ computational neuroscience under Professor Bela Joós during the summer
+ of 2014.
+ The purpose of my research project was to model the measured voltage signal
+ of a bundle of nerves in an arm from an experiment where nerves in the
+ elbow are stimulated and then the propagated signal is measured further
+ down the nerves, around the wrist.
+ I describe different simpler models of neurons used in developping our
+ model of the arm nerves and I describe a form of damage nerves can experience
+ called 
+\begin_inset Quotes eld
+\end_inset
+
+coupled left-shift sodium channels
+\begin_inset Quotes erd
+\end_inset
+
+, modelled by Professor Bela's group.
+ Finally, I describe my completed simulation model written in the Python
+ programming language and give a brief overview of its use and some sample
+ results.
+\end_layout
+
 \begin_layout Section
 Introduction
 \end_layout
@@ -961,10 +985,11 @@ Nerve Damage Model (Boucher, Joós, Morris 2012)
 \end_layout
 
 \begin_layout Standard
-Now that we'd modelled a group of axon nodes connected to each other with
- propagating action potentials, the task was to be able to damage the nerve
- and to then see the effect this had on propagation of signal and the measured
+With a group of axon nodes connected to each other able to experience propagatin
+g action potentials, the task was to be able to damage the nerve and to
+ then see the effect this had on the propagation of signal and the measured
  compound action potential.
+ The model for damage used in this simulation
 \end_layout
 
 \begin_layout Section
