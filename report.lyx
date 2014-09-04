@@ -834,5 +834,154 @@ V_{e}=\frac{\rho_{e}I}{4\pi r}
  is the resistivity of the medium.
 \end_layout
 
+\begin_layout Standard
+The McNeal model is solved by choosing initial values for 
+\begin_inset Formula $V_{m}$
+\end_inset
+
+, 
+\begin_inset Formula $m$
+\end_inset
+
+, 
+\begin_inset Formula $h$
+\end_inset
+
+, and 
+\begin_inset Formula $n$
+\end_inset
+
+, like in the Hodgkin-Huxley model, as well as a position 
+\begin_inset Formula $r$
+\end_inset
+
+ for the central node (where 
+\begin_inset Formula $n=0$
+\end_inset
+
+) and a stimulus 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ The positions of the other nodes are calculated based on their index 
+\begin_inset Formula $n$
+\end_inset
+
+ and a value for the internodal length 
+\begin_inset Formula $L$
+\end_inset
+
+.
+ Essentially each node is located a multiple of 
+\begin_inset Formula $L$
+\end_inset
+
+ away from the central node.
+ Each node's position is precisely 
+\begin_inset Formula $nL$
+\end_inset
+
+ units away from the central node.
+ Given some position coordinates for 
+\begin_inset Formula $I$
+\end_inset
+
+, the distance 
+\begin_inset Formula $r$
+\end_inset
+
+ between the stimulus and node 
+\begin_inset Formula $n$
+\end_inset
+
+ can be calculated from a little geometry and Pythagorean theorem.
+\end_layout
+
+\begin_layout Standard
+The actual values for the dimensions are calculated in the following way.
+ McNeal choose a value of 
+\begin_inset Formula $20\mu m$
+\end_inset
+
+ for the fiber diameter 
+\begin_inset Formula $D$
+\end_inset
+
+, which represents the diameter of the axon 
+\emph on
+and
+\emph default
+ the myelin sheath.
+ McNeal then cites a source stating that the axonal diamter 
+\begin_inset Formula $d$
+\end_inset
+
+ is calculated from the ratio:
+\begin_inset Formula 
+\[
+\frac{d}{D}=0.7
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The internodal length 
+\begin_inset Formula $L$
+\end_inset
+
+ is then calculated from 
+\begin_inset Formula 
+\[
+\frac{L}{D}=100
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, the nodal gap width 
+\begin_inset Formula $l$
+\end_inset
+
+ is simply 
+\begin_inset Formula $l=2.5\mu m$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Nerve Damage Model (Boucher, Joós, Morris 2012)
+\end_layout
+
+\begin_layout Standard
+Now that we'd modelled a group of axon nodes connected to each other with
+ propagating action potentials, the task was to be able to damage the nerve
+ and to then see the effect this had on propagation of signal and the measured
+ compound action potential.
+\end_layout
+
+\begin_layout Section
+Simulation
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Section
+Code
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
 \end_body
 \end_document
