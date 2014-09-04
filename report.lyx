@@ -989,7 +989,138 @@ With a group of axon nodes connected to each other able to experience propagatin
 g action potentials, the task was to be able to damage the nerve and to
  then see the effect this had on the propagation of signal and the measured
  compound action potential.
- The model for damage used in this simulation
+ The damage model used in this simulation was developped by Professor Bela's
+ group and focuses on a specific type of damage related to the functioning
+ of the sodium channels.
+ In this model the voltage-gated sodium channels are much more excitable
+ and respond to lower voltages than normal.
+ Mathematically this corresponsds to a left shift in the sodium activation
+ and inactivation variables 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $h$
+\end_inset
+
+, caused by left-shifting the alpha-beta functions 
+\begin_inset Formula $\alpha_{m}$
+\end_inset
+
+, 
+\begin_inset Formula $\beta_{m}$
+\end_inset
+
+, 
+\begin_inset Formula $\alpha_{h}$
+\end_inset
+
+, and 
+\begin_inset Formula $\beta_{h}$
+\end_inset
+
+.
+ This is done by simply replacing the function argument 
+\begin_inset Formula $V$
+\end_inset
+
+ with 
+\begin_inset Formula $V+LS_{AC}$
+\end_inset
+
+ in the alpha-beta functions, where 
+\begin_inset Formula $LS_{AC}$
+\end_inset
+
+ is the left-shift (in volts) of affected channels.
+ Each node has a property 
+\begin_inset Formula $AC$
+\end_inset
+
+ which represents the fraction of affected channels on the node.
+ In addition to solving for 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $h$
+\end_inset
+
+ using the regular alpha-beta functions, we must now calculate values for
+ 
+\begin_inset Formula $m_{LS}$
+\end_inset
+
+ and 
+\begin_inset Formula $h_{LS}$
+\end_inset
+
+ using the left-shifted alpha-beta functions.
+ Accordingly, the expression for the total sodium current becomes the sum
+ of the current due to healthy channels (with regular 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $h$
+\end_inset
+
+) with the current due to unhealthy, affected, channels (with 
+\begin_inset Formula $m_{LS}$
+\end_inset
+
+ and 
+\begin_inset Formula $h_{LS}$
+\end_inset
+
+):
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+I_{Na}=\bar{g}_{Na}m^{3}h(1-AC)(V-E_{Na})+\bar{g}_{Na}m_{LS}^{3}h_{LS}AC(V-E_{Na})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or simply,
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\[
+I_{Na}=[m^{3}h(1-AC)+m_{LS}^{3}h_{LS}AC]\,\,\bar{g}_{Na}(V-E_{Na})
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
