@@ -1803,6 +1803,53 @@ Results
 Code
 \end_layout
 
+\begin_layout Standard
+The code for the simulation is available open-source and online at https://githu
+b.com/mef51/FiberLoss.
+ This section will give a brief overview of how the code is structured and
+ a look at some of the algorithms used.
+\end_layout
+
+\begin_layout Subsubsection
+Classes
+\end_layout
+
+\begin_layout Standard
+Several classes are defined that describe and implement the different components
+ of the simulation.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+\series bold
+AxonPositionNode:
+\family default
+\series default
+ as
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+\series bold
+NerveFiber:
+\family default
+\series default
+ as
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+\series bold
+NerveBundleSimulation:
+\family default
+\series default
+ as
+\end_layout
+
 \begin_layout Section
 Conclusion
 \end_layout
