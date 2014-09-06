@@ -845,9 +845,9 @@ The external potential felt by a node
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
+\begin{equation}
 V_{e}=\frac{\rho_{e}I}{4\pi r}
-\]
+\end{equation}
 
 \end_inset
 
@@ -1786,13 +1786,14 @@ magnitude of stimulus current
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Some results will be shown after the code and the details of the simulation
+ are examined more closely.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1804,8 +1805,8 @@ Code
 \end_layout
 
 \begin_layout Standard
-The code for the simulation is available open-source and online at https://githu
-b.com/mef51/FiberLoss.
+The code for the simulation is available open-source and online at github.com/mef
+51/FiberLoss.
  This section will give a brief overview of how the code is structured and
  a look at some of the algorithms used.
 \end_layout
@@ -1884,15 +1885,487 @@ NerveBundleSimulation:
  the main simulation loop.
  When this class is instantiated it will create and place the NerveFibers.
  If it succeeds, the simulation can be started.
- The main simulation loop progresses like this:
+ The main simulation loop iterates over every moment of time.
+ In each moment it will iterate over each nerve fiber in the bundle, and
+ for each fiber it will iterate over each node in the fiber.
+ It computes the distance between the node and the external stimulus and
+ then steps the node forward in time by calling the node's integration method.
+ This loop continues until every node has been stepped, in every fiber,
+ and for every moment of time.
+ When the simulation is complete the data is stored in memory under each
+ AxonPositionNode class.
+ From this point the plotting functions can be called to produce a plot
+ for each node in the simulation, or the entirety of the data generated
+ can be dumped into some machine readable format for future analysis.
 \end_layout
 
-\begin_deeper
-\begin_layout Enumerate
-For each moment of time lololo
+\begin_layout Subsubsection
+Integration
 \end_layout
 
-\end_deeper
+\begin_layout Standard
+The equations on 
+\begin_inset Formula $V_{m}$
+\end_inset
+
+, 
+\begin_inset Formula $m$
+\end_inset
+
+, 
+\begin_inset Formula $h$
+\end_inset
+
+, and 
+\begin_inset Formula $n$
+\end_inset
+
+ are solved numerically using a very simple scheme.
+ The equations are solved using what's referred to as the Euler-forward
+ method, which is highly prone to error if 
+\begin_inset Formula $dt$
+\end_inset
+
+ is not small enough but is very easy to implement and worked well for our
+ purposes.
+ In the future it should be straightforward to replace the current integration
+ scheme with a more robust Runge-Kutta method or similar.
+\end_layout
+
+\begin_layout Standard
+The Euler-forward method can be reached through a simple manipulation of
+ the differential equation.
+ Let 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ be some differentiable function that obeys the differential equation:
+\begin_inset Formula 
+\[
+\frac{df}{dx}=g(f)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $g(f)$
+\end_inset
+
+ is some arbitrary function.
+ Recalling the definition of the derivative, substitute 
+\begin_inset Formula $df=f_{2}-f_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $f=f_{1}$
+\end_inset
+
+, and 
+\begin_inset Formula $dx=$
+\end_inset
+
+some arbitrarily small number.
+ Then,
+\begin_inset Formula 
+\[
+\frac{df}{dx}=\frac{f_{2}-f_{1}}{dx}=g(f_{1})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now solving for 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ we arrive at:
+\begin_inset Formula 
+\begin{equation}
+f_{2}=dx\cdot g(f_{1})+f_{1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using this expression, we can pick an initial value for 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ and a small number for 
+\begin_inset Formula $dx$
+\end_inset
+
+ (for example 
+\begin_inset Formula $dx=0.025)$
+\end_inset
+
+ knowing that the smaller 
+\begin_inset Formula $dx$
+\end_inset
+
+ is, the more accurate the solution, we then calculate the 
+\begin_inset Quotes eld
+\end_inset
+
+next
+\begin_inset Quotes erd
+\end_inset
+
+ value 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+.
+ To move forward in time, we just set 
+\begin_inset Formula $f_{1}=f_{2}$
+\end_inset
+
+ and repeat the process, calculating the 
+\begin_inset Quotes eld
+\end_inset
+
+next, next
+\begin_inset Quotes erd
+\end_inset
+
+ value using the equation on 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+.
+ Storing all these values, we ultimately get at a solution of 
+\begin_inset Formula $f$
+\end_inset
+
+ with arbitrary precision and arbitrary length.
+ In highly intensive applications this method is not very efficient, but
+ for this project it serves just fine.
+\end_layout
+
+\begin_layout Subsubsection
+User Interface
+\end_layout
+
+\begin_layout Standard
+The current interface for a researcher wishing to study the model is currently
+ hardly ideal --it is simply a few lines of code stuck at the bottom in
+ the file.
+ In the future it will be much more pleasant to have some sort of visual
+ interface to set parameters.
+ In the meantime however, the current method still provides lots of control.
+\end_layout
+
+\begin_layout Standard
+The stimulus current is specified with a simple object.
+ This object specifies the x, y, and z position of the stimulus, and its
+ magnitude.
+ The code for that looks like this:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+\family typewriter
+\size footnotesize
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},language=Python,numbers=left,numberstyle={\footnotesize},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+\size footnotesize
+stimulusCurrent = {
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+\size footnotesize
+	"magnitude" : -2.59, # uA.
+ the current applied at the surface
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+\size footnotesize
+	"x"         : 0   # cm
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+\size footnotesize
+	"y"         : 0.3 # cm 
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+\size footnotesize
+	"z"         : 0   # cm
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+\size footnotesize
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The nerve is specified with a similar object.
+ The nerve object represents the bundle as a whole and specifies the number
+ of fibers there are, the number of nodes each fiber has, the x, y, and
+ z position of the bundle and the length of each axon node.
+ In addition, the minimum and maximum diameter of a fiber is specified and
+ the algorithm attempts to randomly create and place fibers so that they
+ are not overlapping.
+ The diameter of each fiber is randomly generated and forced to be in the
+ range specified by the minimum and maximum diameter.
+ That code is written as:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+\family typewriter
+\size footnotesize
+\begin_inset listings
+lstparams "basicstyle={\small\ttfamily},language=Python,numbers=left,numberstyle={\footnotesize},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+nerve = {
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+	"numFibers" : 2,
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+	"numNodes"  : 11, 
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+	"fibers"    : [], # initialize an empty list
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+	"radius"    : 0.0, # cm
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+	"x"         : 0.0, # cm
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+	"y"         : 0.0, # cm 
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+	"z"         : 0.0, # cm
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+	"minFiberDiam" : 0.0019, # cm
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+	"maxFiberDiam" : 0.0021, # cm
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+	"axonalLength" : 2.5e-4 # cm
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The final property of the nerve object is a 
+\begin_inset Quotes eld
+\end_inset
+
+damage map
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This object specifies the proportion of damaged channels in each node by
+ index.
+ It is a set of key-value pairs where the key is the index of a node and
+ the value is a number from 0 to 1 representing the proportion.
+ For example, attaching the following property to the nerve object:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+\family typewriter
+\size footnotesize
+\begin_inset listings
+lstparams "basicstyle={\small\ttfamily},language=Python,numbers=left,numberstyle={\footnotesize},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+damageMap : {
+\end_layout
+
+\begin_layout Plain Layout
+
+	11 : 0.9 # heavily damaged node at n = 11
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+will cause the node with index 
+\begin_inset Formula $n=11$
+\end_inset
+
+ to have an 
+\begin_inset Formula $AC$
+\end_inset
+
+ of 0.9.
+ Currently this affects all nodes with 
+\begin_inset Formula $n=11$
+\end_inset
+
+ in all fibers.
+\end_layout
+
+\begin_layout Standard
+With all this setup out of the way the simulation can be started, the plots
+ can be created, and the data dumped to a file.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+
+\family typewriter
+\size footnotesize
+\begin_inset listings
+lstparams "basicstyle={\small\ttfamily},language=Python,numbers=left,numberstyle={\footnotesize},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+T = 55 # ms
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+dt = 0.025 # ms
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+simulation = NerveBundleSimulation(T, dt, nerve, stimulusCurrent)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+simulation.simulate() # modifies the nerve object
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+plotInfoOfNodes(simulation)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+simulation.dumpJSON("data.json")
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+print "Done."
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The complete source code is available free and open-source online at 
+\end_layout
+
+\begin_layout Standard
+github.com/mef51/FiberLoss
+\end_layout
+
 \begin_layout Section
 Conclusion
 \end_layout
