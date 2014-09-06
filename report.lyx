@@ -1827,7 +1827,34 @@ Several classes are defined that describe and implement the different components
 AxonPositionNode:
 \family default
 \series default
- as
+ This class defines the concept of the axon node.
+ Specifically it creates variables that will track the node's index, it's
+ position, the fraction of affected channels it has and its dimensions.
+ In addition, the solution variables are stored in this class: each node
+ stores its own 
+\begin_inset Formula $V_{m}$
+\end_inset
+
+, 
+\begin_inset Formula $m$
+\end_inset
+
+, 
+\begin_inset Formula $h$
+\end_inset
+
+, and 
+\begin_inset Formula $n$
+\end_inset
+
+ solutions.
+ Moreover it is here that the alpha-beta functions and the method of numerical
+ integration is defined.
+ All the mathematical calculations happen within instances of this class.
+ Each node in the simulation creates an instance of this class.
+ This class also defines somes plotting functions that will generate images
+ of plots.
+ This is the primary visualisation tool in the simulation.
 \end_layout
 
 \begin_layout Itemize
@@ -1837,7 +1864,11 @@ AxonPositionNode:
 NerveFiber:
 \family default
 \series default
- as
+ The NerveFiber class represents a single nerve and essentially stores a
+ set of nodes that are connected to each other.
+ When the fiber is instatiated it creates AxonPositionNode classes for each
+ node and assigns it it's position, index, and its damage.
+ A NerveFiber class is instantiated for each nerve fiber in the simulation.
 \end_layout
 
 \begin_layout Itemize
@@ -1847,9 +1878,21 @@ NerveFiber:
 NerveBundleSimulation:
 \family default
 \series default
- as
+ This class manages the simulation.
+ It tracks the timeline, the attributes of nerve bundle (including how many
+ fibers there are and how many nodes to create per fiber), and implements
+ the main simulation loop.
+ When this class is instantiated it will create and place the NerveFibers.
+ If it succeeds, the simulation can be started.
+ The main simulation loop progresses like this:
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+For each moment of time lololo
+\end_layout
+
+\end_deeper
 \begin_layout Section
 Conclusion
 \end_layout
