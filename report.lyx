@@ -111,6 +111,8 @@ In this report I describe my time at the uOttawa Physics Department doing
  of a bundle of nerves in an arm from an experiment where nerves in the
  elbow are stimulated and then the propagated signal is measured further
  down the nerves, around the wrist.
+ In damaged nerves, the signal does not propagate properly down the arm,
+ and can be a clear signal of some diseases.
  I describe different models of neurons used in developping our own model
  of the arm nerves and I describe a form of damage nerves can experience
  called 
@@ -152,7 +154,8 @@ During my time there I learned the basics of neuroscience.
  the nerves at another point (like the wrist).
  In arms with damaged nerves, this signal can arrive more slowly or more
  weakly than in arms with healthy nerves.
- 
+ Therefore, being able to detect and characterize signals that aren't propagatin
+g properly can lead to more accurate diagnoses.
 \end_layout
 
 \begin_layout Standard
@@ -2085,14 +2088,12 @@ status open
 \begin_layout Plain Layout
 \paragraph_spacing single
 
-\size footnotesize
 stimulusCurrent = {
 \end_layout
 
 \begin_layout Plain Layout
 \paragraph_spacing single
 
-\size footnotesize
 	"magnitude" : -2.59, # uA.
  the current applied at the surface
 \end_layout
@@ -2100,28 +2101,24 @@ stimulusCurrent = {
 \begin_layout Plain Layout
 \paragraph_spacing single
 
-\size footnotesize
 	"x"         : 0   # cm
 \end_layout
 
 \begin_layout Plain Layout
 \paragraph_spacing single
 
-\size footnotesize
 	"y"         : 0.3 # cm 
 \end_layout
 
 \begin_layout Plain Layout
 \paragraph_spacing single
 
-\size footnotesize
 	"z"         : 0   # cm
 \end_layout
 
 \begin_layout Plain Layout
 \paragraph_spacing single
 
-\size footnotesize
 }
 \end_layout
 
@@ -2368,6 +2365,27 @@ github.com/mef51/FiberLoss
 
 \begin_layout Section
 Conclusion
+\end_layout
+
+\begin_layout Standard
+During my summer at the uOttawa Physics Department I worked with Professor
+ Bela Joós to create a simulation model of an experiment whereby nerve damage
+ in an arm is assessed by stimulating near the elbow and measuring the propagate
+d signal down the arm around the wrist.
+ We succeeded in completing a preliminary Python script that simulates a
+ bundle of nerve fibers with axon nodes connected to each other, and were
+ able to observe effects like signal propagation and signal loss due to
+ damage.
+ Our model was built up from earlier models of the neuron, specifically
+ the famous Hodgkin-Huxley model from 1952 and the McNeal model from 1976.
+ In the future our goal is to refine the simulation model and to use it
+ to answer specific questions about nerve damage.
+ Can we characterize neural pathologies by the measured signal? What kind
+ of damage is completely destructive to signal propagation? If a single
+ node is completely damaged is the whole fiber useless? These are questions
+ we should be able to answer with our model.
+ The answers to these questions can open doors to diagnosis and treatment
+ of patients.
 \end_layout
 
 \end_body
