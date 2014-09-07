@@ -70,7 +70,13 @@
 \begin_layout Title
 
 \series bold
-Work Term Report
+PHY3907 Work Term Report
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Computational Neuroscience and Fiber Loss Simulation at uOttawa
 \end_layout
 
 \begin_layout Author
@@ -677,9 +683,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename model.jpg
-	width 75page%
+	width 50page%
 
 \end_inset
 
@@ -1796,11 +1803,7 @@ magnitude of stimulus current
 
 \begin_layout Standard
 Some results will be shown after the code and the details of the simulation
- are examined more closely.
-\end_layout
-
-\begin_layout Subsubsection
-Results
+ and its implementation are examined more closely.
 \end_layout
 
 \begin_layout Section
@@ -1971,7 +1974,7 @@ where
 \begin_inset Formula $dx=$
 \end_inset
 
-some arbitrarily small number.
+ some arbitrarily small number.
  Then,
 \begin_inset Formula 
 \[
@@ -2060,9 +2063,8 @@ User Interface
 \end_layout
 
 \begin_layout Standard
-The current interface for a researcher wishing to study the model is currently
- hardly ideal --it is simply a few lines of code stuck at the bottom in
- the file.
+The current interface for a researcher wishing to study the model is hardly
+ ideal --it is simply a few lines of code stuck at the bottom of the file.
  In the future it will be much more pleasant to have some sort of visual
  interface to set parameters.
  In the meantime however, the current method still provides lots of control.
@@ -2361,6 +2363,189 @@ The complete source code is available free and open-source online at
 
 \begin_layout Standard
 github.com/mef51/FiberLoss
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Standard
+The following is an example simulation run using the model described above.
+ In this simulation, a single fiber with 41 nodes is stimulated.
+ The eleventh node in the fiber, that is, the node with 
+\begin_inset Formula $n=11$
+\end_inset
+
+ is damaged completely with 
+\begin_inset Formula $AC=1.0$
+\end_inset
+
+.
+ By our convention, the node that is closest to the stimulus is given 
+\begin_inset Formula $n=0$
+\end_inset
+
+, with the nodes on the right given 
+\begin_inset Formula $n=1,\,2,\,3,\,4...$
+\end_inset
+
+ and the nodes on the left given 
+\begin_inset Formula $n=-1,\,-2,\,-3,-4...$
+\end_inset
+
+ and so on.
+ In the graphs you'll see information on the membrane voltage of the node,
+ the time-course of the 
+\begin_inset Formula $m$
+\end_inset
+
+, 
+\begin_inset Formula $h$
+\end_inset
+
+, and 
+\begin_inset Formula $n$
+\end_inset
+
+ variables, and the time-course of the ionic currents.
+ We can see healthy, action potentials at 
+\begin_inset Formula $n=1$
+\end_inset
+
+, and at 
+\begin_inset Formula $n=11$
+\end_inset
+
+, where all the channels are damaged, no action potentials at all, and only
+ a slight response to the stimulus.
+ Moreoever, past the damaged 
+\begin_inset Formula $n=11$
+\end_inset
+
+, node, we see only a single action potential has survived at the healthy
+ 
+\begin_inset Formula $n=12$
+\end_inset
+
+, unlike the multiple spikes seen at 
+\begin_inset Formula $n=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename axon1fiber0.jpg
+	width 60page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Multiple action potentials caused by a stimulus
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename axon11fiber0.jpg
+	width 60page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Response of a damaged node
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename axon12fiber0.jpg
+	width 60page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Faulty signal transmission past the damaged node
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These results are promising with regard to the model's usefulness for studying
+ these types of situations.
+ Much more simulations will be needed to produce concrete results!
 \end_layout
 
 \begin_layout Section
