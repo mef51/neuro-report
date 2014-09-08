@@ -1,1 +1,6 @@
-report.lyx~
+
+# temporary files
+*.*~
+
+# guideline pdf
+wtrg*.pdf

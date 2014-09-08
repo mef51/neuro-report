@@ -86,6 +86,10 @@ Mohammed A.
 \begin_inset Newline newline
 \end_inset
 
+Submitted to Professor Serge Desgreniers
+\begin_inset Newline newline
+\end_inset
+
 University of Ottawa
 \end_layout
 
@@ -173,7 +177,7 @@ Before I could model a bundle of damaged nerves in an arm I had to learn
  mathematical model developped in the 1950s used to model voltage clamp
  experiments with a giant squid axon.
  After I could successfully model a single node, we found a paper by Donald
- Mcneal written in 1976 that presented a model of axon nodes connected to
+ McNeal written in 1976 that presented a model of axon nodes connected to
  each other.
  With this model we could simulate signals propagating from node to node,
  and successfully simulated results that indicated propagation.
@@ -378,6 +382,7 @@ The equations in the Hodgkin-Huxley model that form the basis of our model
 \begin_inset Formula 
 \begin{equation}
 \begin{alignedat}{1}C_{m}\frac{dV_{m}}{dt}=-I_{Na}-I_{K}-I_{L}+I_{stim}\end{alignedat}
+\label{eq:hhvm}
 \end{equation}
 
 \end_inset
@@ -386,8 +391,8 @@ The equations in the Hodgkin-Huxley model that form the basis of our model
 \end_layout
 
 \begin_layout Standard
-The equation is an application of the capacitance equation where the cellular
- membrane is a sort of capacitor because it separates charges from the inside
+The equation is an application of the capacitance equation with the cellular
+ membrane as a sort of capacitor because it separates charges from the inside
  and outside of the cell.
  The term 
 \begin_inset Formula $C_{m}$
@@ -418,7 +423,7 @@ The equation is an application of the capacitance equation where the cellular
 \begin_inset Formula $I_{L}$
 \end_inset
 
-term for what they called 'leakage' current, to account for current flow
+ term for what they called 'leakage' current, to account for current flow
  that wasn't caused by sodium or potassium.
  The current terms are treated using Ohm's law and in turn obey more equations:
 \end_layout
@@ -501,11 +506,16 @@ The final pieces are the equations that govern the
 
 .
  These functions are voltage dependent and represent the number of times
- per second that a closed gate opens (in the case of 
+ per second that a closed gate opens (the 
 \begin_inset Formula $\alpha$
 \end_inset
 
-) and the number of times per second that an open gate closes.
+ function) and the number of times per second that an open gate closes (the
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+ function).
  These equations are given by:
 \end_layout
 
@@ -516,6 +526,7 @@ The final pieces are the equations that govern the
 \frac{dh}{dt} & = & \alpha_{h}(1-h)-\beta_{h}h\\
 \frac{dn}{dt} & = & \alpha_{n}(1-n)-\beta_{n}n
 \end{aligned}
+\label{eq:mhn}
 \end{equation}
 
 \end_inset
@@ -651,7 +662,21 @@ Numerically integrate the differential equations on
 \begin_inset Formula $n$
 \end_inset
 
- (equations (1) and (2)).
+ (equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hhvm"
+
+\end_inset
+
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mhn"
+
+\end_inset
+
+)).
  
 \end_layout
 
@@ -934,7 +959,7 @@ The McNeal model is solved by choosing initial values for
 
 \begin_layout Standard
 The actual values for the dimensions are calculated in the following way.
- McNeal choose a value of 
+ McNeal chooses a value of 
 \begin_inset Formula $20\mu m$
 \end_inset
 
@@ -997,7 +1022,7 @@ Nerve Damage Model (Boucher, Joós, Morris 2012)
 \begin_layout Standard
 With a group of axon nodes connected to each other able to experience propagatin
 g action potentials, the task was to be able to damage the nerve and to
- then see the effect this had on the propagation of signal and the measured
+ then see the effect this had on the propagation of signals and the measured
  compound action potential.
  The damage model used in this simulation was developped by Professor Bela's
  group and focuses on a specific type of damage related to the functioning
@@ -1144,7 +1169,7 @@ With the mathematical framework in place, a virtual arm is created for the
  connected to each other.
  Each of the nodes obey the equations explained above.
  Each fiber has a different diameter and is placed in a different position.
- A stimulus is placed some position away from the bundle of nerves and so
+ A stimulus is placed some position away from the bundle of nerves so that
  each nerve fiber feels a slightly different stimulus.
  Many parts of the simulation can be tweaked for different virtual experiments:
  the number of fibers, the number of nodes each fiber has, the diameter
@@ -1769,10 +1794,10 @@ axon node length
 
 \size small
 -2.59 
-\begin_inset Formula $\mathrm{\mu A}$
+\begin_inset Formula $\mu$
 \end_inset
 
-
+A
 \end_layout
 
 \end_inset
@@ -1861,7 +1886,7 @@ AxonPositionNode:
  Each node in the simulation creates an instance of this class.
  This class also defines somes plotting functions that will generate images
  of plots.
- This is the primary visualisation tool in the simulation.
+ The plots in this class are the primary visualisation tool of the simulation.
 \end_layout
 
 \begin_layout Itemize
@@ -1872,7 +1897,7 @@ NerveFiber:
 \family default
 \series default
  The NerveFiber class represents a single nerve and essentially stores a
- set of nodes that are connected to each other.
+ list of nodes that are connected to each other.
  When the fiber is instatiated it creates AxonPositionNode classes for each
  node and assigns it it's position, index, and its damage.
  A NerveFiber class is instantiated for each nerve fiber in the simulation.
@@ -1886,8 +1911,8 @@ NerveBundleSimulation:
 \family default
 \series default
  This class manages the simulation.
- It tracks the timeline, the attributes of nerve bundle (including how many
- fibers there are and how many nodes to create per fiber), and implements
+ It tracks the timeline, the attributes of the nerve bundle (including how
+ many fibers there are and how many nodes to create per fiber), and implements
  the main simulation loop.
  When this class is instantiated it will create and place the NerveFibers.
  If it succeeds, the simulation can be started.
@@ -2139,7 +2164,7 @@ The nerve is specified with a similar object.
  are not overlapping.
  The diameter of each fiber is randomly generated and forced to be in the
  range specified by the minimum and maximum diameter.
- That code is written as:
+ The code for the nerve object is written as:
 \end_layout
 
 \begin_layout Standard
@@ -2297,7 +2322,7 @@ will cause the node with index
 
 \begin_layout Standard
 With all this setup out of the way the simulation can be started, the plots
- can be created, and the data dumped to a file.
+ can be created, and the data dumped to a file:
 \end_layout
 
 \begin_layout Standard
@@ -2422,12 +2447,12 @@ The following is an example simulation run using the model described above.
 \begin_inset Formula $n=11$
 \end_inset
 
-, node, we see only a single action potential has survived at the healthy
+ node, we see only a single action potential has survived at the healthy
  
 \begin_inset Formula $n=12$
 \end_inset
 
-, unlike the multiple spikes seen at 
+ node, unlike the multiple spikes seen at 
 \begin_inset Formula $n=1$
 \end_inset
 
@@ -2571,6 +2596,75 @@ d signal down the arm around the wrist.
  we should be able to answer with our model.
  The answers to these questions can open doors to diagnosis and treatment
  of patients.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+References
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+\noindent
+\align left
+Boucher P.A., Joos B., Morris C.E.
+ 
+\emph on
+Coupled left-shift of Nav channels: modeling the Na
+\begin_inset Formula $^{+}$
+\end_inset
+
+ loading and dysfunctional excitability of damaged axons
+\emph default
+.
+ J Comput Neurosci.
+ 33: 301-19, October 2012.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+\noindent
+\align left
+Hodgkin A.L., Huxley A.F.
+ 
+\emph on
+A quantitative description of membrane current and its application to conduction
+ and excitation in nerve.
+
+\emph default
+ J Physiol.
+ 117:500-544, August 1952.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+\noindent
+\align left
+McNeal D.R.
+ 
+\emph on
+Analysis of a Model for Excitation of Myelinated Nerve.
+
+\emph default
+ IEEE Transations on Biomedical Engineering.
+ BME-23 No.
+ 4, July 1976.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+\noindent
+\align left
+SaltatoryConduction.jpg.
+ Accessed online Sept 8.
+ http://bio1903.nicerweb.com/Locked/media/ch48/48_15SaltatoryConduction.jpg.
+ 
 \end_layout
 
 \end_body
