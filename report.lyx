@@ -133,7 +133,7 @@ coupled left-shift sodium channels
 \begin_inset Quotes erd
 \end_inset
 
-, modelled by Professor Bela's group.
+, modelled by Professor Joós's group.
  Finally, I describe my completed simulation model written in the Python
  programming language and give a brief overview of its use and some sample
  results.
@@ -145,20 +145,20 @@ Introduction
 
 \begin_layout Standard
 I spent my summer coop term at the University of Ottawa studying neuroscience
- under Professor Bela Joos.
+ under Professor Bela Joós.
  The term lasted four months, starting in May and ending in August.
  It was also my first time living on my own; I moved out of my home in Kanata
  and rented a room in a neighbourhood very close to the University with
  the goal of shaving off almost 2 hours spent commuting every day.
  I worked on the third-floor of Macdonald, the Physics building, in an office
- with two other students also doing research with Professor Bela.
+ with two other students also doing research with Professor Joós.
  The environment was very relaxed and academic.
  I worked on my own laptop.
 \end_layout
 
 \begin_layout Standard
 During my time there I learned the basics of neuroscience.
- Professor Bela and I talked about a project to model an experiment where
+ Professor Joós and I talked about a project to model an experiment where
  nerve damage in an arm is measured by electrically stimulating one area
  of the arm (like the elbow) and then measuring the propagated signal through
  the nerves at another point (like the wrist).
@@ -182,7 +182,7 @@ Before I could model a bundle of damaged nerves in an arm I had to learn
  With this model we could simulate signals propagating from node to node,
  and successfully simulated results that indicated propagation.
  After that, we added a model of damage to each node of the axon.
- The model for this damage was developped by Professor Bela's group.
+ The model for this damage was developped by Professor Joós's group.
  With all these pieces we were able to represent a bundle of nerve fibers
  as found in an arm; we could control the length of the nerve, the size
  of each nerve and the amount of damage in each nerve.
@@ -307,9 +307,9 @@ The wall of the axon, the cellular membrane, is polarized.
  A concentration gradient of ions is maintained between the inside and the
  outside of the membrane so that the inside of the cell is more negatively
  charged than the outside.
- Hodgkin and Huxley initiated action potentials in the squid axon by stimulating
- it at a point with an external potential.
- They explained that when an action potential occurs, positively charged
+ Hodgkin and Huxley studied a squid axon using a voltage clamp to measure
+ the flow of ionic currents through the membrane of the cell.
+ They later theorized that when an action potential occurs, positively charged
  sodium ions would flood into the cell through a point in the membrane of
  the axon, suddenly raising the membrane potential at that point, and disturbing
  the membrane potential a little further down the axon.
@@ -324,13 +324,15 @@ resetting
 \end_inset
 
  the membrane potential of the axon at that point to its resting potential.
- Meanwhile at a point nearby on the axon, after being destabilized by it's
- neighbour, the same thing occurs and the potential spike is observed a
- little further down.
+ Though they didn't have the computational power to prove the mechanism
+ of action potential propagation, they theorized that, meanwhile, at a point
+ nearby on the axon, after being destabilized by it's neighbour, the same
+ thing occurs and the potential spike is observed a little further down.
  This continues and the spike can be said to travel down the axon, and all
  the while the axon attempts to restore the concentration gradient and maintain
  a polarized potential all along the inside and outside of the cellular
  wall.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1024,7 +1026,7 @@ With a group of axon nodes connected to each other able to experience propagatin
 g action potentials, the task was to be able to damage the nerve and to
  then see the effect this had on the propagation of signals and the measured
  compound action potential.
- The damage model used in this simulation was developped by Professor Bela's
+ The damage model used in this simulation was developped by Professor Joós's
  group and focuses on a specific type of damage related to the functioning
  of the sodium channels.
  In this model the voltage-gated sodium channels are much more excitable
@@ -2240,7 +2242,7 @@ nerve = {
 \begin_layout Plain Layout
 \paragraph_spacing single
 
-	"axonalLength" : 2.5e-4 # cm
+	"axonalLength" : 2.5e-6 # cm
 \end_layout
 
 \begin_layout Plain Layout
@@ -2613,7 +2615,7 @@ References
 \paragraph_spacing single
 \noindent
 \align left
-Boucher P.A., Joos B., Morris C.E.
+Boucher P.A., Joós B., Morris C.E.
  
 \emph on
 Coupled left-shift of Nav channels: modeling the Na
